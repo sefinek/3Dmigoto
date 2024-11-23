@@ -66,7 +66,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{83DCC342-4199-4E03-B720-80E5EDF18500}"
 	ProjectSection(SolutionItems) = preProject
 		Dependencies\d3dx.ini = Dependencies\d3dx.ini
-		Dependencies\uninstall.bat = Dependencies\uninstall.bat
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pcre2", "pcre2", "{2356EA4F-1B7B-439C-803F-6F30F7A86FE3}"
@@ -92,18 +91,6 @@ Global
 		Zip Release|x64 = Zip Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Debug|Win32.ActiveCfg = Debug|Win32
-		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Debug|x64.ActiveCfg = Debug|x64
-		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Release|Win32.ActiveCfg = Release|Win32
-		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Release|x64.ActiveCfg = Release|x64
-		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Zip Release|Win32.ActiveCfg = Zip Release|Win32
-		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Zip Release|x64.ActiveCfg = Zip Release|x64
-		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Debug|x64.ActiveCfg = Debug|x64
-		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Release|Win32.ActiveCfg = Release|Win32
-		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Release|x64.ActiveCfg = Release|x64
-		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Zip Release|Win32.ActiveCfg = Zip Release|Win32
-		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Zip Release|x64.ActiveCfg = Zip Release|x64
 		{92A679C7-A67F-4B16-B055-7A2F4C23DD80}.Debug|Win32.ActiveCfg = Debug|Win32
 		{92A679C7-A67F-4B16-B055-7A2F4C23DD80}.Debug|Win32.Build.0 = Debug|Win32
 		{92A679C7-A67F-4B16-B055-7A2F4C23DD80}.Debug|x64.ActiveCfg = Debug|x64
@@ -116,6 +103,18 @@ Global
 		{92A679C7-A67F-4B16-B055-7A2F4C23DD80}.Zip Release|Win32.Build.0 = Zip Release|Win32
 		{92A679C7-A67F-4B16-B055-7A2F4C23DD80}.Zip Release|x64.ActiveCfg = Zip Release|x64
 		{92A679C7-A67F-4B16-B055-7A2F4C23DD80}.Zip Release|x64.Build.0 = Zip Release|x64
+		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Debug|x64.ActiveCfg = Debug|x64
+		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Release|Win32.ActiveCfg = Release|Win32
+		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Release|x64.ActiveCfg = Release|x64
+		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Zip Release|Win32.ActiveCfg = Zip Release|Win32
+		{4265C0D8-8671-49C0-8EB5-EB940FD08482}.Zip Release|x64.ActiveCfg = Zip Release|x64
+		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Debug|x64.ActiveCfg = Debug|x64
+		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Release|Win32.ActiveCfg = Release|Win32
+		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Release|x64.ActiveCfg = Release|x64
+		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Zip Release|Win32.ActiveCfg = Zip Release|Win32
+		{C9205DC6-7CE4-4939-9EFC-FE61483CCE01}.Zip Release|x64.ActiveCfg = Zip Release|x64
 		{16459E48-9CD1-49FE-8703-D8B275CFCE1E}.Debug|Win32.ActiveCfg = Debug|Win32
 		{16459E48-9CD1-49FE-8703-D8B275CFCE1E}.Debug|x64.ActiveCfg = Debug|x64
 		{16459E48-9CD1-49FE-8703-D8B275CFCE1E}.Release|Win32.ActiveCfg = Release|Win32
