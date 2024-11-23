@@ -22,7 +22,7 @@ The current project is set up using Visual Studio 2017 Community, so anyone can 
 4. Run VS2017.
 5. TEAM menu, Connect. Opens the Connect page for cloning.
 6. Use Clone menu, and enter the repository:
-   https://github.com/bo3b/3Dmigoto.git
+   https://github.com/sefinek/3Dmigoto.git
 7. Change the source-code destination to where you prefer, and then click Clone.
 8. Double-click your new local repository to set it active (if you have others.)
 9. At the home menu in Team Explorer, double click StereovisionHacks.sln to open the solution.
