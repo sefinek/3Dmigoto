@@ -2,13 +2,13 @@
 ========
 
 ### Chiri's wrapper to enable fixing broken stereoscopic effects in DX11 games.
+### Adjusted for use with [Stella Mod](https://stella.sefinek.net)
 
 This includes the entire code base, and it will compile, link, and run in it's current state.
 
 This is not the end-user version of the tool, this is for people developing the code by fixing
 bugs, adding new features, or documenting how to use it.
-<br>
-<br>
+
 The current project is set up using Visual Studio 2017 Community, so anyone can do development for free.
 
 ### To get started do:
