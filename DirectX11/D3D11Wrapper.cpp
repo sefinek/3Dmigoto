@@ -14,14 +14,14 @@
 //#include <set>
 //#include <iterator>
 //#include <string>
-//
+
 //#include "util.h"
 //#include "Override.h"
 //#include "HackerDevice.h"
 //#include "HackerContext.h"
 
 // The Log file and the Globals are both used globally, and these are the actual
-// definitions of the variables.  All other uses will be via the extern in the 
+// definitions of the variables.  All other uses will be via the extern in the
 // globals.h and log.h files.
 
 // Globals used to be allocated on the heap, which is pointless given that it
@@ -159,7 +159,7 @@ static bool InitializeDLL()
 	//	return false;
 	//}
 
-	// If we are going to use 3D Vision Direct Mode, we need to set the driver 
+	// If we are going to use 3D Vision Direct Mode, we need to set the driver
 	// into that mode early, before any possible CreateDevice occurs.
 	if (G->gForceStereo == 2)
 	{
@@ -441,7 +441,7 @@ void InitD311()
 	InitializeCriticalSectionPretty(&resource_creation_mode_lock);
 
 	InitializeDLL();
-	
+
 
 	// Chain through to the either the original DLL in the system, or to a proxy
 	// DLL with the same interface, specified in the d3dx.ini file.
@@ -482,7 +482,7 @@ void InitD311()
 	}
 	else
 	{
-		// We'll look for this in DLLMainHook to avoid callback to self.		
+		// We'll look for this in DLLMainHook to avoid callback to self.
 		// Must remain all lower case to be matched in DLLMainHook.
 		// We need the system d3d11 in order to find the original proc addresses.
 		// We hook LoadLibraryExW, so we need to use that here.
@@ -695,10 +695,10 @@ static void ShowDebugInfo(ID3D11Device *origDevice)
 // https://msdn.microsoft.com/en-us/library/windows/desktop/ff476875(v=vs.85).aspx
 //
 // Also, when we are called with down-level requests, we need to not wrap the objects
-// and not generate iniParams or StereoTextures, because a bunch of features are 
+// and not generate iniParams or StereoTextures, because a bunch of features are
 // missing there, and can cause problems.  FarCry4 hangs on Win10 because they
 // call with pFeatureLevels=9.2.  As seen in the link, CreateTexture1D does not
-// exist in 9.x, so it's not legal to call that with a 9.x Device.  We will 
+// exist in 9.x, so it's not legal to call that with a 9.x Device.  We will
 // assume that they don't plan to use that device for the game, and will look
 // only for a DX11 device. No point in supporting DX10 here, too few games to matter.
 // https://msdn.microsoft.com/en-us/library/windows/desktop/ff476150(v=vs.85).aspx#ID3D11Device_CreateTexture1D
@@ -711,15 +711,15 @@ static void ShowDebugInfo(ID3D11Device *origDevice)
 // it as a .ini option to force this mode.
 // (Can be an array. We are looking only at first element. Seems OK.)
 //
-// 7-21-16: Now adding the ability to disable this forcing function, because Marlow 
-// Briggs and Narco Terror do not launch when we do this.  
+// 7-21-16: Now adding the ability to disable this forcing function, because Marlow
+// Briggs and Narco Terror do not launch when we do this.
 // This will now make it a option in the d3dx.ini, default to force DX11, but can be
 // disabled, or forced to always use DX11.
 //
 // pFeatureLevels can be modified here because we have changed the signature from const.
 // If pFeatureLevels comes in null, that is OK, because the default behavior for
 // CreateDevice is to create a DX11 Device.
-// 
+//
 // Returns true if we need to error out with E_INVALIDARG, which is default in d3dx.ini.
 
 static bool ForceDX11(D3D_FEATURE_LEVEL *featureLevels)
@@ -846,12 +846,12 @@ static HackerDevice* wrap_d3d11_device_and_context(ID3D11Device **ppDevice, ID3D
 // For creating the device, we need to call the original D3D11CreateDevice in order to initialize
 // Direct3D, and collect the original Device and original Context.  Both of those will be handed
 // off to the wrapped HackerDevice and HackerContext objects, so they can call out to the originals
-// as needed.  Both Hacker objects need access to both Context and Device, so since both are 
+// as needed.  Both Hacker objects need access to both Context and Device, so since both are
 // created here, it's easy enough to provide them upon instantiation.
 //
 // Now intended to be fully null safe- as games seem to have a lot of variance.
 //
-// 1-8-18: Switching tacks to always return ID3D11Device1 objects, which are the 
+// 1-8-18: Switching tacks to always return ID3D11Device1 objects, which are the
 // platform_update required type.  Since it's a superset, we can in general just
 // the reference as a normal ID3D11Device.
 // In the no platform_update case, the mOrigDevice1 will actually be an ID3D11Device.
@@ -896,7 +896,7 @@ HRESULT WINAPI D3D11CreateDevice(
 		//             triggering this if we have hooked that call, as we do
 		//             when we have been injected from outside the game
 		//             directory. Cause of crash in DOA6:
-		//             https://github.com/bo3b/3Dmigoto/issues/106
+		//             https://github.com/sefinek/3Dmigoto/issues/106
 		return _D3D11CreateDevice(pAdapter, DriverType, Software,
 				Flags, pFeatureLevels, FeatureLevels,
 				SDKVersion, ppDevice, pFeatureLevel,
