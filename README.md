@@ -15,7 +15,6 @@ The current project is set up using Visual Studio 2017 Community, so anyone can 
 
 1. Install IE 10 or 11. VS2017 apparently requires this, but might have been fixed recently.
 2. Download VS2017 Community for Windows Desktop.
-   http://www.visualstudio.com/en-us/downloads#d-community
 3. Install VS2017 and be sure to select:
     - Programming Languages -> Visual C++
     - Windows 11 SDK (10.0.22621.0)
