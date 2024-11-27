@@ -253,8 +253,8 @@ public:
 	// Make this bump to new line slightly more clear by making it a convenience routine.
 	static void NextLine(const char *c, size_t &pos, size_t max)
 	{
-		while (c[pos] != 0x0a && pos < max) 
-			pos++; 
+		while (c[pos] != 0x0a && pos < max)
+			pos++;
 		pos++;
 	}
 
@@ -281,8 +281,8 @@ public:
 	// sequence is of the form:
 	// Name                 Index   Mask Register SysValue  Format   Used
 	// -------------------- ----- ------ -------- -------- ------- ------
-	// TEXCOORD                 0   xy          0     NONE   float   xy  
-	// TEXCOORD                 1   xy          1     NONE   float   xy  
+	// TEXCOORD                 0   xy          0     NONE   float   xy
+	// TEXCOORD                 1   xy          1     NONE   float   xy
 	//
 	// The goal is to switch from outputing:
 	//		float2 v0 : TEXCOORD0,
@@ -291,9 +291,9 @@ public:
 	//		float4 v0 : TEXCOORD0,	// change packing to float4 if different texcoord
 	//		float2 v1 : TEXCOORD1,
 	//
-	// This is only going to be done for TEXCOORD.  I've looked at examples of 
+	// This is only going to be done for TEXCOORD.  I've looked at examples of
 	// outputs like SV_TARGET, where fxc could have packed them, but it did not.
-	// Adding the extra parts there creates spurious warnings, so for now, 
+	// Adding the extra parts there creates spurious warnings, so for now,
 	// we'll only do TEXCOORD as a known problem.
 	// This does also unfortunately create warnings for the TEXCOORD outputs, but
 	// I was unable to find any other way to avoid the fxc packing optimization.
@@ -312,7 +312,7 @@ public:
 		if (strcmp(name, "TEXCOORD") != 0)
 			return false;
 
-		// Any v* register already active needs to be skipped, to allow the 
+		// Any v* register already active needs to be skipped, to allow the
 		// normal packing to succeed.  input:v1.xy + w1.zw. or output:o1.xy + p1.zw
 		if (inUse.find(string("v" + to_string(reg1))) != inUse.end())
 			return false;
@@ -415,9 +415,9 @@ public:
 	//
 	// Name                 Index   Mask Register SysValue  Format   Used
 	// -------------------- ----- ------ -------- -------- ------- ------
-	// TEXCOORD                 0   xy          0     NONE   float   xy  
-	// TEXCOORD                 1   xy          1     NONE   float   xy  
-	// COLOR                    3   xyz         2     NONE   float   xyz 
+	// TEXCOORD                 0   xy          0     NONE   float   xy
+	// TEXCOORD                 1   xy          1     NONE   float   xy
+	// COLOR                    3   xyz         2     NONE   float   xyz
 
 	void ParseInputSignature(Shader *shader, const char *c, size_t size)
 	{
@@ -961,8 +961,8 @@ public:
 					(*mType)[slot] = rw + "TextureCubeArray<" + string(format) + ">";
 				else if (!strncmp(dim, "2dMS", 4))
 				{
-					// The documentation says it's not legal, but we see Texture 2DMS with no ending size in WatchDogs. 
-					// Instead of "2dMS4", it's just "2dMS". If we set that to Texture2DMS<float4>, with no size, 
+					// The documentation says it's not legal, but we see Texture 2DMS with no ending size in WatchDogs.
+					// Instead of "2dMS4", it's just "2dMS". If we set that to Texture2DMS<float4>, with no size,
 					// it generates the same code as the ASM.	 sscanf returns -1 as an error.
 					//
 					// LogInfo("--> Texture %s: sprintf=%d as %s\n", dim, error, buffer);
@@ -1373,7 +1373,7 @@ public:
 					e.bt == DT_float || e.bt == DT_float2 || e.bt == DT_float3 || e.bt == DT_float4 ||
 					e.bt == DT_uint || e.bt == DT_uint2 || e.bt == DT_uint3 || e.bt == DT_uint4 ||
 					e.bt == DT_int || e.bt == DT_int2 || e.bt == DT_int3 || e.bt == DT_int4 ||
-					e.bt == DT_float4x4 || e.bt == DT_float3x4 || e.bt == DT_float4x3 || e.bt == DT_float3x3 || 
+					e.bt == DT_float4x4 || e.bt == DT_float3x4 || e.bt == DT_float4x3 || e.bt == DT_float3x3 ||
 					e.bt == DT_float4x2 || e.bt == DT_float2x4))
 				{
 					// Register each array element.
@@ -1435,17 +1435,17 @@ public:
 				else if (e.bt == DT_float4x2 || e.bt == DT_float3x3 || e.bt == DT_float4x3 ||
 					e.bt == DT_float2x4 || e.bt == DT_float3x4 || e.bt == DT_float4x4)
 				{
-					e.matrixRow = 0; int offsetPos = (bufferRegister << 16) + offset; 
+					e.matrixRow = 0; int offsetPos = (bufferRegister << 16) + offset;
 					mCBufferData[offsetPos] = e; if (structLevel >= 0) pendingStructAttributes[structLevel].push_back(offsetPos);
-					e.matrixRow = 1; offsetPos = (bufferRegister << 16) + offset + 1 * 16; 
+					e.matrixRow = 1; offsetPos = (bufferRegister << 16) + offset + 1 * 16;
 					mCBufferData[offsetPos] = e; if (structLevel >= 0) pendingStructAttributes[structLevel].push_back(offsetPos);
 					if (e.bt != DT_float4x2)
 					{
-						e.matrixRow = 2; offsetPos = (bufferRegister << 16) + offset + 2 * 16; 
+						e.matrixRow = 2; offsetPos = (bufferRegister << 16) + offset + 2 * 16;
 						mCBufferData[offsetPos] = e; if (structLevel >= 0) pendingStructAttributes[structLevel].push_back(offsetPos);
 						if (e.bt != DT_float4x3 && e.bt != DT_float3x3)
 						{  // Nearly sure this missing nesting was a bug
-							e.matrixRow = 3; offsetPos = (bufferRegister << 16) + offset + 3 * 16;  
+							e.matrixRow = 3; offsetPos = (bufferRegister << 16) + offset + 3 * 16;
 							mCBufferData[offsetPos] = e; if (structLevel >= 0) pendingStructAttributes[structLevel].push_back(offsetPos);
 						}
 					}
@@ -1488,7 +1488,7 @@ public:
 							sprintf(buffer, "  %s%s%s %s = %s;\n", structSpacing.c_str(), modifier.c_str(), type, name, bString.c_str());
 						mOutput.insert(mOutput.end(), buffer, buffer + strlen(buffer));
 					}
-					// Special int case, to avoid converting to float badly, creating #QNAN instead. 
+					// Special int case, to avoid converting to float badly, creating #QNAN instead.
 					else if (e.bt == DT_int || e.bt == DT_int2 || e.bt == DT_int3 || e.bt == DT_int4)
 					{
 						int in[4] = { 0, 0, 0, 0 };
@@ -1505,7 +1505,7 @@ public:
 						}
 						else
 							sprintf(buffer, "  %s%s%s %s = {", structSpacing.c_str(), modifier.c_str(), type, name);
-						
+
 						mOutput.insert(mOutput.end(), buffer, buffer + strlen(buffer));
 
 						for (int i = 0; i < numRead - 1; ++i)
@@ -1577,7 +1577,7 @@ public:
 						sprintf(buffer, "%.9g};\n", v[15]);
 						mOutput.insert(mOutput.end(), buffer, buffer + strlen(buffer));
 					}
-					// If we don't know what the initializer is, let's not just keep reading through it.  Let's now scan 
+					// If we don't know what the initializer is, let's not just keep reading through it.  Let's now scan
 					// them and output them, with a bad line in between for hand-fixing.  But, the shader will be generated.
 					else
 					{
@@ -1613,7 +1613,7 @@ public:
 					mOutput.insert(mOutput.end(), buffer, buffer + strlen(buffer));
 				}
 			} while (strncmp(c + pos, "// }", 4));
-			
+
 			// Write closing declaration.
 			const char *endBuffer = "}\n";
 			mOutput.insert(mOutput.end(), endBuffer, endBuffer + strlen(endBuffer));
@@ -2018,7 +2018,7 @@ public:
 				right2[pos] = 0;
 			}
 
-			// Buffer reference?  
+			// Buffer reference?
 			//  This section was doing some char-by-char indexing into the search string 'right2', and has been
 			//  changed to just use sscanf_s as a more reliable way of parsing, although it's a risky change.
 			strPos = strstr(right2, "cb");
@@ -2027,9 +2027,9 @@ public:
 				int bufIndex = 0;
 				int bufOffset;
 				char regAndSwiz[opcodeSize];
-				
+
 				// By scanning these in this order, we are sure to cover every variant, without mismatches.
-				// We use the unusual format of [^+] for the string lookup because ReadStatement has already 
+				// We use the unusual format of [^+] for the string lookup because ReadStatement has already
 				// crushed the spaces out of the input.
 
 				// Like: -cb2[r12.w+63].xyzx  as : -cb(bufIndex)[(regAndSwiz)+(bufOffset)]
@@ -2195,7 +2195,7 @@ public:
 						// Bug was to not handle the struct case here, and truncate string.
 						//  Like g_OmniLights[r5.w].m_PositionFar -> g_OmniLights[r5.w]
 						//sprintf(right3 + strlen(right3), "[%s]", indexRegister);
-						
+
 						// Start fresh with original string and just replace, not char* manipulate.
 						// base e.g: g_OmniLights[0].m_PositionFar
 						string base = i->second.Name;
@@ -2451,18 +2451,18 @@ public:
 		return replaceInt(buffer);
 	}
 
-	// This was expected to take input of the form 
+	// This was expected to take input of the form
 	//	r1.xyxx
 	// and decide how to truncate it based on the input type of Texture2D, 3D or Cube.
 	// If it's Texture2D for example, that would trim to only the first two elements
 	// as a 2D texture, so r1.xy
 	//
-	// This failed for constants of the form 
+	// This failed for constants of the form
 	//	float4(0.5, 0.5, 0, 0)
 	// which were found in AC3.
 	// The fix is to look for that constant format too, and if we see those, truncate
 	// the constant to match.  So, for example, float4(0.5, 0.5, 0, 0) with Texture2D
-	// becomes float2(0.5, 0.5) as the two elements. 
+	// becomes float2(0.5, 0.5) as the two elements.
 
 	void truncateTexturePos(char *op, const char *textype)
 	{
@@ -2525,7 +2525,7 @@ public:
 		if (!strncmp(op, "float", 5))
 			return;
 
-		int pos = 5;																		
+		int pos = 5;
 		if (!strncmp(textype, "Buffer<", strlen("Buffer<"))) pos = 2;						// int  .x
 		else if (!strncmp(textype, "Texture1D<", strlen("Texture1D<"))) pos = 3;			// int2 .xy
 		else if (!strncmp(textype, "Texture2DMS<", strlen("Texture2DMS<"))) pos = 3;
@@ -2632,7 +2632,7 @@ public:
 				for (int i = 0; i < count; i++)
 					printed += sprintf_s(&convert[printed], sizeof(convert) - printed, "%f,", lit[i]);
 			}
-			else 
+			else
 			{
 				count = sscanf_s(target, "l(%i,%i,%i,%i)", &ilit[0], &ilit[1], &ilit[2], &ilit[3]);
 				assert(count != 0);
@@ -2754,7 +2754,7 @@ public:
 
 	// The boolean check routines had the problem that they only looked for the actual register
 	// name, like r1, instead of including the component, like r1.x.  This fails in some cases
-	// because another component can legally be used in between, which would not clear the 
+	// because another component can legally be used in between, which would not clear the
 	// boolean use case.
 	// The fix here is to make the elements of the set include the swizzle components too.
 	// It's not clear if the components can be broken into pieces by the compiler, like
@@ -2764,7 +2764,7 @@ public:
 	// But it makes no sense that an 'and .. r0.zw' would have one component boolean, and one not,
 	// so rather than do them component by component, we'll use the whole operand.
 
-	// Well, another example is a n "and r0.xyzw, r0.yyyy, r2.xyzw" where r0.y is set early. 
+	// Well, another example is a n "and r0.xyzw, r0.yyyy, r2.xyzw" where r0.y is set early.
 	// This requires at least single component entries in the mBooleanRegisters.
 
 	// 12-5-15: New change to all users of addBoolean, is that they will call a small helper
@@ -3118,7 +3118,7 @@ public:
 								"float wpos = 1.0 / zpos;\n", depthBufferStatement.c_str(), G->ZRepair_DepthTextureReg2, G->ZRepair_ZPosCalc2.c_str());
 
 							// There are a whole series of fixes to the statements that are doing mOutput.insert() - mOutput.begin();
-							// We would get a series of Asserts (vector mismatch), but only rarely, usually at starting a new game in AC3.  
+							// We would get a series of Asserts (vector mismatch), but only rarely, usually at starting a new game in AC3.
 							// The problem appers to be that mOutput.begin() was being calculated BEFORE the mOutput.insert(), which seems to
 							// be the compiler optimizing.
 							// The problem seems to be that the Insert could move the mOutput array altogether, and because the funny use of
@@ -4089,7 +4089,7 @@ public:
 				continue;
 			}
 
-			// Ignore comments. 
+			// Ignore comments.
 			if (!strncmp(c + pos, "//", 2))
 			{
 				NextLine(c, pos, size);
@@ -4182,7 +4182,7 @@ public:
 					// In the case where headers have been stripped, we will not have any CBufferNames,
 					// but we will have these dcl_constantbuffer declarations.  We are now using
 					// the absence of any mCBufferNames as indication that we have stripped headers,
-					// and create the fake cb2 style names as the best we can do.  
+					// and create the fake cb2 style names as the best we can do.
 					// Not sure this will work in all cases, because the offsets into the buffer are
 					// not required to be zero for the first element, but we have no other info here.
 					if (mCBufferNames.empty())
@@ -4326,7 +4326,7 @@ public:
 			// available, we try to fall back to the raw text definitions, and use registers instead of
 			// named variable.  A big problem though is that the count is unknown if we have no headers,
 			// so it should be Texture2D<float2> for example, but we only see (float,float,float,float).
-			// With no headers and no reflection this can't be done, so for now we'll set them to <*4> 
+			// With no headers and no reflection this can't be done, so for now we'll set them to <*4>
 			// as the most common use case. But only for this case where the game is being hostile.
 			// It will probably require hand tuning to correct usage of those texture registers.
 			// Also unlikely to work for the (mixed,mixed,mixed,mixed) case.  <mixed4> will be wrong.
@@ -4477,7 +4477,7 @@ public:
 			}
 			else if (!strcmp(statement, "{"))
 			{
-				// Declaration from 
+				// Declaration from
 				// dcl_immediateConstantBuffer { { 1.000000, 0, 0, 0},
 				//                      { 0, 1.000000, 0, 0},
 				//                      { 0, 0, 1.000000, 0},
@@ -4512,7 +4512,7 @@ public:
 			}
 			else if (!strcmp(statement, "dcl_input"))
 			{
-				// Can have 'vCoverage' variable implicitly defined, 
+				// Can have 'vCoverage' variable implicitly defined,
 				// not in input signature when reflection is stripped.
 				if (!strcmp(op1, "vCoverage"))
 				{
@@ -4564,11 +4564,11 @@ public:
 			else if (!strncmp(statement, "dcl_", 4))
 			{
 				// Hateful strcmp logic is upside down, only output for ones we aren't already handling.
-				if (strcmp(statement, "dcl_output") && 
+				if (strcmp(statement, "dcl_output") &&
 					strcmp(statement, "dcl_output_siv") &&
 					strcmp(statement, "dcl_globalFlags") &&
-					//strcmp(statement, "dcl_input_siv") && 
-					strcmp(statement, "dcl_input_ps") && 
+					//strcmp(statement, "dcl_input_siv") &&
+					strcmp(statement, "dcl_input_ps") &&
 					strcmp(statement, "dcl_input_ps_sgv") &&
 					strcmp(statement, "dcl_input_ps_siv"))
 				{
@@ -4710,17 +4710,17 @@ public:
 						removeBoolean(op1);
 						break;
 
-						// UDIV instruction also could damage the original register before finishing, giving wrong results. 
+						// UDIV instruction also could damage the original register before finishing, giving wrong results.
 						// e.g. udiv r0.x, r1.x, r0.x, r0.y
 						// variant: udiv null, r1.xy, r3.zwzz, r2.zwzz
-						// To fix this, we are using the temp variables declared at the top. 
+						// To fix this, we are using the temp variables declared at the top.
 						// expected output:
 						//   uiDest.x = (uint)r0.x / (uint)r0.y;
 						//   r1.x = (uint)r0.x % (uint)r0.y;
 						//   r0.x = uiDest.x;
 						//
 						// This will swizzle based on either op1 or op2, as long as it's not null.  It's not clear whether
-						// the swizzle is allowed to vary for each half of the instruction, like xy for /, zw for %.  
+						// the swizzle is allowed to vary for each half of the instruction, like xy for /, zw for %.
 						// To allow for that, we'll set the temp registers with full swizzle, then only use the specific
 						// parts required for each half, as the safest approach.  Might not generate udiv though.
 						// Also removed saturate code, because udiv does not specify that.
@@ -4867,7 +4867,7 @@ public:
 						// Curiously enough, the documentation for ISHR and ISHL is wrong, and documents the parameters backwards.
 						// http://msdn.microsoft.com/en-us/library/windows/desktop/hh447145(v=vs.85).aspx
 						// This was proven by looking at actual game ASM, and trying to make the HLSL match the generated ASM.
-						// It is the C standard of: shift-expression << additive-expression 
+						// It is the C standard of: shift-expression << additive-expression
 						// So, we need op2 as the Shift-Expression, op3 as the # of bits to shift.
 					case OPCODE_ISHR:
 						remapTarget(op1);
@@ -4931,7 +4931,7 @@ public:
 						removeBoolean(op1);
 						break;
 
-						// Code generation for this weird instruction is tuned to indent the way we want, 
+						// Code generation for this weird instruction is tuned to indent the way we want,
 						// and still look like a single instruction.  Still has weird indent in middle of instruction,
 						// but it seems more valuable to have it be a single line.
 						//
@@ -5700,12 +5700,12 @@ public:
 						break;
 
 						// Failing case of: "movc_sat r2.xyzw, r2.xxxx, r7.xyzw, r4.xyzw"
-						// Turned into: 
+						// Turned into:
 						// r2.x = saturate(r2.x ? r7.x : r4.x);
 						// r2.y = saturate(r2.x ? r7.y : r4.y);
 						// r2.z = saturate(r2.x ? r7.z : r4.z);
 						// r2.w = saturate(r2.x ? r7.w : r4.w);
-						// which damages r2.x at the first line, and uses it in each. 
+						// which damages r2.x at the first line, and uses it in each.
 						// Changed it to just be:   "r2.xyzw = saturate(r2.xxxx ? r7.xyzw : r4.xyzw);"
 						// But I'm not sure why this was unrolled to begin with.
 					case OPCODE_MOVC:
@@ -5771,7 +5771,7 @@ public:
 						addBoolean(op1);
 						break;
 					}
-					case OPCODE_IEQ: 
+					case OPCODE_IEQ:
 					{
 						remapTarget(op1);
 						applySwizzle(op1, op2, true);
@@ -5909,8 +5909,8 @@ public:
 						sprintf(buffer, "  }\n");
 						appendOutput(buffer);
 						break;
-					
-						// Found in Witcher3 Compute Shaders 
+
+						// Found in Witcher3 Compute Shaders
 					case OPCODE_SYNC:
 						if (!strcmp(statement, "sync_g_t"))
 							sprintf(buffer, "  GroupMemoryBarrierWithGroupSync();\n");
@@ -6161,7 +6161,7 @@ public:
 						removeBoolean(op1);
 						break;
 					}
-					// This opcode was missing, and used in WatchDogs. 
+					// This opcode was missing, and used in WatchDogs.
 					// expected code "samplepos r0.xy, t1.xyxx, v1.x" -> "r0.xy = t1.GetSamplePosition(v1.x);"
 					case OPCODE_SAMPLE_POS:
 					{
@@ -6181,7 +6181,7 @@ public:
 						// lod dest[.mask], srcAddress[.swizzle], srcResource[.swizzle], srcSampler
 						// ret Object.CalculateLevelOfDetail(sampler_state S, float x);
 						// "lod r0.x, r0.xyzx, t2.y, s2" -> "r0.x = t2.CalculateLevelOfDetailUnclamped(s2, r0.xyz);"
-						// CalculateLevelOfDetailUnclamped compiles to t2.y, 
+						// CalculateLevelOfDetailUnclamped compiles to t2.y,
 						// CalculateLevelOfDetail compiles to t2.x
 					case OPCODE_LOD:
 					{
@@ -6267,7 +6267,7 @@ public:
 						sscanf_s(op4, "t%d.", &textureId);
 						sscanf_s(op5, "s%d", &samplerId);
 						truncateTexturePos(op2, mTextureType[textureId].c_str());
-						sprintf(buffer, "  %s = %s.Gather(%s, %s, %s)%s;\n", writeTarget(op1), mTextureNames[textureId].c_str(), 
+						sprintf(buffer, "  %s = %s.Gather(%s, %s, %s)%s;\n", writeTarget(op1), mTextureNames[textureId].c_str(),
 							mSamplerNames[samplerId].c_str(), ci(op2).c_str(), ci(op3).c_str(), strrchr(op4, '.'));
 						appendOutput(buffer);
 						removeBoolean(op1);
@@ -6285,7 +6285,7 @@ public:
 						sscanf_s(op4, "t%d.", &textureId);
 						sscanf_s(op5, "s%d", &samplerId);
 						truncateTexturePos(op2, mTextureType[textureId].c_str());
-						sprintf(buffer, "  %s = %s.GatherCmp(%s, %s, %s, %s)%s;\n", writeTarget(op1), mTextureNames[textureId].c_str(), 
+						sprintf(buffer, "  %s = %s.GatherCmp(%s, %s, %s, %s)%s;\n", writeTarget(op1), mTextureNames[textureId].c_str(),
 							mSamplerComparisonNames[samplerId].c_str(), ci(op2).c_str(), ci(op6).c_str(), ci(op3).c_str(), strrchr(op4, '.'));
 						appendOutput(buffer);
 						removeBoolean(op1);
@@ -6356,7 +6356,7 @@ public:
 					}
 
 						// Missing opcodes for SM5.  Not implemented yet, but we want to generate some sort of code, in case
-						// these are used in needed shaders.  That way we can hand edit the shader to make it usable, until 
+						// these are used in needed shaders.  That way we can hand edit the shader to make it usable, until
 						// this is completed.
 					case OPCODE_STORE_UAV_TYPED:
 					case OPCODE_LD_UAV_TYPED:
@@ -6378,21 +6378,21 @@ public:
 						appendOutput(buffer);
 						break;
 
-						// The GetDimensions can also see a 4 parameter version in the immediate case. 
+						// The GetDimensions can also see a 4 parameter version in the immediate case.
 						// https://msdn.microsoft.com/en-us/library/windows/desktop/hh447214(v=vs.85).aspx
 						//
 						// resinfo[_uint|_rcpFloat] dest[.mask], srcMipLevel.select_component, srcResource[.swizzle]
 						// In different variants based on input texture, becomes:
 						// void Object.GetDimensions(UINT MipLevel, typeX Width, typeX Height, typeX Elements, typeX Depth, typeX NumberOfLevels, typeX NumberOfSamples);
-						// 
+						//
 						// We only see the immediate version l(0) in use, like:
 						//
-						//  resinfo_indexable(texture2d)(uint, uint, uint, uint)_uint r2.zw, l(0), t5.zwxy  
+						//  resinfo_indexable(texture2d)(uint, uint, uint, uint)_uint r2.zw, l(0), t5.zwxy
 						//   Becomes 2 param version:   SectorAtlasTexture_UINT_TextureObject.GetDimensions(r2.z, r2.w);
 						//
-						//  resinfo_indexable(texture2dms)(float, float, float, float)_uint r0.xy, l(0), t0.xyzw 
+						//  resinfo_indexable(texture2dms)(float, float, float, float)_uint r0.xy, l(0), t0.xyzw
 						//   Becomes 3 param version:   DepthVPSampler_TextureObject.GetDimensions(r0.x, r0.y, bitmask.x);
-						// 
+						//
 						//  resinfo_indexable(texture2darray)(float, float, float, float) r0.xy, l(0), t0.xyzw
 						//
 						// So, we'll only handle that immediate for now, and generate syntax errors if we see any other variant.
@@ -6422,11 +6422,11 @@ public:
 						if (bindStripped)
 						{
 							// In the case where the reflection information has been stripped from the headers,
-							// we are left with only the text line itself.  Try to parse the text for variants 
+							// we are left with only the text line itself.  Try to parse the text for variants
 							// we know, and add them to the bindInfo.
 							//
 							// e.g. from Batman and Witcher3:
-							//  resinfo_indexable(texture2d)(float,float,float,float)_uint r1.yw, l(0), t3.zxwy 
+							//  resinfo_indexable(texture2d)(float,float,float,float)_uint r1.yw, l(0), t3.zxwy
 
 							char texType[opcodeSize];
 							char retType[opcodeSize];
@@ -6459,7 +6459,7 @@ public:
 							}
 						}
 
-						// We only presently handle the float and _uint return types, and the const 0 mode. 
+						// We only presently handle the float and _uint return types, and the const 0 mode.
 						// And the texture2d and textures2dms types. That's all we've seen so far.
 						// This same output sequence is used for both a normal parse case, and the stripped header case.
 
@@ -6512,10 +6512,10 @@ public:
 								unknownVariant = false;
 							}
 
-							// For the output, we saw a r3.xyzw which makes no sense for this instruction. 
+							// For the output, we saw a r3.xyzw which makes no sense for this instruction.
 							// Not sure this is fully correct, but the goal here is to apply the swizzle from the op3, which is the texture
-							// register, as the pieces that are valid to copy to the op1 output.  
-							// The op3 texture swizzle can determine which components to use, and what order.  
+							// register, as the pieces that are valid to copy to the op1 output.
+							// The op3 texture swizzle can determine which components to use, and what order.
 							// The op1 output determines which ones are valid for output.
 							if (returnType == RESINFO_INSTRUCTION_RETURN_UINT)
 							{
@@ -6719,13 +6719,13 @@ public:
 
 	void WriteAddOnDeclarations()
 	{
-		string declaration = 
+		string declaration =
 			"\n\n"
 			"// 3Dmigoto declarations\n";
 
 		// Also inject the helper macro of 'cmp' to fix any boolean comparisons.
 		// This is a bit of a hack, but simply adds a "-" in front of the comparison,
-		// which negates the bool comparison from 1:0 to -1:0. 
+		// which negates the bool comparison from 1:0 to -1:0.
 		//    r0.y = cmp(0 < r0.x);   becomes
 		//    r0.y = -(0 < r0.x);
 		// This allows us to avoid having helper routines, and needing different
@@ -6763,7 +6763,7 @@ public:
 	void WriteHeaderDeclarations()
 	{
 		string header =
-			"// ---- Created with 3Dmigoto v" + string(VER_FILE_VERSION_STR) + " on " + LogTime();
+			"// ---- Created with Stella Mod 3Dmigoto v" + string(VER_FILE_VERSION_STR) + " on " + LogTime();
 
 		// using .begin() to ensure first lines in files.
 		mOutput.insert(mOutput.begin(), header.c_str(), header.c_str() + header.length());
@@ -6788,7 +6788,7 @@ const string DecompileBinaryHLSL(ParseParameters &params, bool &patched, std::st
 	// block to handle any exceptions and mark the shader as presently bad.
 	// In order for this to work, the /EHa option must be enabled for code-generation
 	// so that system level exceptions are caught too.
-	
+
 	// It's worth noting that some fatal exceptions will still bypass this catch,
 	// like a stack corruption, stack overflow, or out of memory, and crash the game.
 	// The termination handler approach does not catch those errors either.
